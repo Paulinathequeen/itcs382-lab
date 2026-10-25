@@ -75,19 +75,40 @@ Table 3. What you did with each SonarQube issue in Table 1
 
 | No. in Table 1 | Fixed or kept | Commit, or the reason for keeping it |
 | --- | --- | --- |
+| 1 | Kept | It is a CLI app, System.out is intended. |
+| 2 | Kept | It is a CLI app, System.out is intended. |
+| 3 | Kept | It is a CLI app, System.out is intended. |
+| 4 | Kept | It is a CLI app, System.out is intended. |
+| 5 | Kept | Out of scope for this small lab. |
+| 6 | Fixed | a5c72f0 |
+| 7 | Fixed | a5c72f0 |
+| 8 | Kept | It is a CLI app, System.out is intended. |
+| 9 | Fixed | a5c72f0 |
+| 10 | Kept | It is a CLI app, System.out is intended. |
+| 11 | Kept | It is a CLI app, System.out is intended. |
+| 12 | Kept | File stream is closed at the end of the program. |
+| 13 | Fixed | a5c72f0 |
 
-Number of SonarQube issues that remain after your fixes:
+Number of SonarQube issues that remain after your fixes: 9
 
 The two design problems that you fixed
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
+| Weak cohesion / Bug | Fixed string comparison in `ParcelService` using `.equals()` instead of `==` | a5c72f0 |
+| Content coupling | Attempted to fix by changing `Parcel.status` to `private`, but reverted to `public` due to build dependencies. | a5c72f0 |
 
 Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
 
 ```text
-
-```
+Commands: store <code> <studentId> <size 1-3>, pickup <code> <days>, list, staff, quit
+store P1 6501 2
+Locker 2
+pickup P1 5
+Parcel picked up. Fee: 5.0
+staff
+Parcel P1 in locker 2
+quit
 
 ## Task 4. AI-generated poor and good designs
 
