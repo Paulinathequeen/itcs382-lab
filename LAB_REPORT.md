@@ -83,7 +83,7 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 6 | Fixed | a5c72f0 |
 | 7 | Fixed | a5c72f0 |
 | 8 | Kept | It is a CLI app, System.out is intended. |
-| 9 | Fixed | a5c72f0 |
+| 9 | Fixed | f2dc9f9 |
 | 10 | Kept | It is a CLI app, System.out is intended. |
 | 11 | Kept | It is a CLI app, System.out is intended. |
 | 12 | Kept | File stream is closed at the end of the program. |
@@ -95,8 +95,8 @@ The two design problems that you fixed
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
-| Weak cohesion / Bug | Fixed string comparison in `ParcelService` using `.equals()` instead of `==` | a5c72f0 |
-| Content coupling | Attempted to fix by changing `Parcel.status` to `private`, but reverted to `public` due to build dependencies. | a5c72f0 |
+| Probable bug (NullPointerException) | Fixed the string comparison (== to .equals()) and added a null check (`parcel != null`) in `pickUp` so the program doesn't crash when a parcel is not found. | f2dc9f9 |
+| Weak cohesion / Code smell | Removed unused imports and fields, and handled the empty catch block to clean up the code. | f2dc9f9 |
 
 Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
 
@@ -109,6 +109,8 @@ Parcel picked up. Fee: 5.0
 staff
 Parcel P1 in locker 2
 quit
+
+P1,6501,2
 
 ## Task 4. AI-generated poor and good designs
 
