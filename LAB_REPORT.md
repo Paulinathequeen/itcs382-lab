@@ -143,12 +143,22 @@ I would rather extend the `bikeshare-good` version. Because it uses a `MemberTyp
 
 5.1 What does SonarQube check, and what does it not check? Answer with examples from this lab.
 
+SonarQube checks code quality and syntactic bugs. For example, in this lab, it successfully found the string comparison bug (`==` instead of `.equals()`) in `ParcelService` and flagged unused imports. However, it does not check design quality, such as cohesion or coupling. It could not tell us that the `BikeShare` class in the poor design was doing too much, nor did it flag the public static fields as a design flaw (it only flagged them as a code smell).
+
 5.2 When should you not trust the AI review? Give an example from this lab.
 
+You should not blindly trust the AI review when it lacks context or is too pedantic. For example, in Task 2, the AI flagged that the `Scanner(System.in)` in `Main.java` is never closed. While technically true, for a short-lived command-line application, closing `System.in` is unnecessary and can even cause issues. Therefore, human verification is always needed.
+
 5.3 What will you do differently in Project Phase 2 after this lab?
+
+I will start using SonarQube. 
 
 ## AI usage declaration
 
 | AI tool and exact model | Purpose | Files or parts that it produced or changed | How you checked its output |
 | --- | --- | --- | --- |
-| | | | |
+| Claude Sonnet 5.5 (25 October 2026) | Task 2: Review the starter code using Prompt A. | `reviews/parcelpoint-review.md` | I manually checked the reported line numbers in the code and verified the findings against the actual source code. |
+| DeepSeek Chat (25 October 2026) | Acted as an interactive tutor for the entire assignment. Assisted with environment setup, Git troubleshooting, Java code debugging, and **drafted the answers for the written report questions (Tasks 2-5).** | `ParcelService.java` (Code fixes) and `LAB_REPORT.md` (Formulation of answers for 2.1-2.3, 4.1-4.3, 5.1-5.3, and the final report structure). | I verified the code fixes by compiling (`mvn package`) and running the tests. I reviewed and adjusted the drafted report answers to ensure they accurately reflect my actual SonarQube results and personal understanding of the code. |
+| Claude Sonnet 5.5 (25 October 2026) | Task 4: Generate the poorly designed BikeShare program using Prompt B. | `bikeshare-poor` (All files in the project) | I compiled it with `mvn package` and ran the test commands to ensure it built successfully. |
+| Claude Sonnet 5.5 (25 October 2026) | Task 4: Generate the well-designed BikeShare program using Prompt C. | `bikeshare-good` (All files in the project) | I compiled it with `mvn package`, ran the program, and compared its structure to the poor version. |
+| Claude Sonnet 5.5 (25 October 2026) | Task 4: Review both BikeShare versions using Prompt A. | `reviews/bikeshare-poor-review.md` and `reviews/bikeshare-good-review.md` | I verified the AI's findings against the actual SonarQube output and manual code inspection. |
