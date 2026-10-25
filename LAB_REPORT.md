@@ -1,16 +1,16 @@
 # Lab Report, Code Quality and Design Quality
 
-Repository URL:
+Repository URL: https://github.com/Paulinathequeen/itcs382-lab.git
 
 ## Tools
 
 | Item | Version or name |
 | --- | --- |
-| JDK | |
-| Maven | |
-| IDE | |
-| SonarQube for IDE | |
-| AI tool and exact model | |
+| JDK | OpenJDK 25.0.4.1 (Temurin) |
+| Maven | Apache Maven 3.10.0 |
+| IDE | Visual Studio Code 1.143.1 |
+| SonarQube for IDE | 6.2.0 |
+| AI tool and exact model | Claude Sonnet 5.5 |
 
 ## Task 1. SonarQube on the starter code
 
@@ -38,23 +38,36 @@ Table 1. SonarQube issues in the starter code
 
 | Item | Value |
 | --- | --- |
-| Date | |
-| AI tool and exact model | |
-| Commit reviewed | |
-| How the AI read the files (attached the files, opened the folder, or pasted the files) | |
-| Output file in the reviews folder | |
+| Date | 25 October 2025 |
+| AI tool and exact model | Claude Sonnet 5.5 |
+| Commit reviewed | 990d80e |
+| How the AI read the files (attached the files, opened the folder, or pasted the files) | Attached the files |
+| Output file in the reviews folder | reviews/parcelpoint-review.md |
 
 Table 2. All findings on the starter code
 
 | No. | File:line | Finding | Found by (SonarQube, AI or both) | SonarQube rule or course term | Correct? (yes or no, and why) |
 | --- | --- | --- | --- | --- | --- |
-| 1 | | | | | |
+| 1 | ParcelService.java:42 | Strings compared using == | Both | java:S4973 | yes, causes pickup to fail. |
+| 2 | ParcelService.java:76 | FileWriter is never closed | Both | java:S2095 | yes, resource leak. |
+| 3 | ParcelService.java:80 | Empty catch block | Both | java:S108 | yes, hides errors silently. |
+| 4 | ParcelService.java:6 | Unused import 'java.util.Date' | Both | java:S1128 | yes, dead code. |
+| 5 | ParcelService.java:12 | Unused field 'maxParcels' | Both | java:S1068 | yes, field is never read. |
+| 6 | Main.java:9 | Replace System.out by a logger | SonarQube | java:S106 | no, it is a CLI app, so console output is intended. |
+| 7 | ParcelService.java:9 | Weak class cohesion (handles fees, lockers, SMS, files) | AI | Class cohesion | yes, the class has too many responsibilities. |
+| 8 | ParcelService.java:28 | Content coupling (modifies Parcel's public status) | AI | Content coupling | yes, breaks encapsulation. |
 
 2.1 Name two problems that only the AI review found.
 
+The AI found design-level issues that SonarQube missed, such as *weak class cohesion* in `ParcelService` (it handles too many unrelated jobs like fees, files, and SMS) and *content coupling* (it directly modifies the public `status` field of the `Parcel` class).
+
 2.2 Name one problem that only SonarQube found, or write none.
 
+SonarQube found that the `java.time` API should be used instead of `java.util.Date` (Rule S2143), which the AI did not explicitly mention.
+
 2.3 Name one AI finding that was wrong or too vague, and explain why. If every finding was right, explain how you checked them.
+
+Most AI findings were correct when checked against the code (e.g., verifying the `==` comparison on line 42). However, the AI noted that the `Scanner` in `Main.java` is never closed. While technically true, it is too pedantic for a short-lived CLI application, as closing `System.in` is generally not required here.
 
 ## Task 3. Fix and check
 
