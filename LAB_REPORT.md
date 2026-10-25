@@ -10,7 +10,7 @@ Repository URL: https://github.com/Paulinathequeen/itcs382-lab.git
 | Maven | Apache Maven 3.10.0 |
 | IDE | Visual Studio Code 1.143.1 |
 | SonarQube for IDE | 6.2.0 |
-| AI tool and exact model | Claude Sonnet 5.5 |
+| AI tool and exact model | Claude Sonnet 5.5 / DeepSeek Chat |
 
 ## Task 1. SonarQube on the starter code
 
