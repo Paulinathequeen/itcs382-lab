@@ -116,22 +116,28 @@ P1,6501,2
 
 | Item | bikeshare-poor | bikeshare-good |
 | --- | --- | --- |
-| Date | | |
-| AI tool and exact model | | |
-| Prompt (B or C as given, or your changed prompt in full) | | |
-| Builds with mvn package (yes or no) | | |
-| Number of classes, interfaces, enums and records | | |
-| SonarQube issues, total | | |
-| SonarQube issues, by rule | | |
-| AI review findings in Check 1 | | |
-| AI review findings in Check 2 | | |
-| Review output file in the reviews folder | | |
+| Date | 25 October 2026 | 25 October 2026 |
+| AI tool and exact model | Claude Sonnet 5.5 | Claude Sonnet 5.5 |
+| Prompt (B or C as given, or your changed prompt in full) | Prompt B as given | Prompt C as given |
+| Builds with mvn package (yes or no) | yes | yes |
+| Number of classes, interfaces, enums and records | 1 | 12 |
+| SonarQube issues, total | 20 | 5 |
+| SonarQube issues, by rule | java:S106 (12x System.out), java:S2386 (4x public static), java:S3776 (1x Complexity), java:S1172, java:S3358, java:S7467 | java:S106 (3x System.out), java:S1172 (unused param), java:S8450 (boilerplate) |
+| AI review findings in Check 1 | 3 | 1 |
+| AI review findings in Check 2 | 4 | 3 |
+| Review output file in the reviews folder | `reviews/bikeshare-poor-review.md` | `reviews/bikeshare-good-review.md` |
 
 4.1 Did SonarQube report any cohesion or coupling problem in bikeshare-poor? Quote the rule and the message if it did.
 
+SonarQube does not have explicit rules for cohesion or coupling. However, it reported a severe code smell that indicates weak cohesion: `java:S3776`. This confirms that the `run` method in the poor design does too many things (procedural/logical cohesion).
+
 4.2 Did the AI review tell the two versions apart? Give one finding for bikeshare-poor that does not appear for bikeshare-good.
 
+Yes, the AI review clearly distinguished them. In `bikeshare-poor`, the AI found **Content Coupling** (the class modifies public static arrays like `bikeAt` directly). This does not appear in `bikeshare-good` because the `Fleet` class encapsulates the data and protects it with proper methods.
+
 4.3 Which version would you rather extend with a new member type, such as a visitor who pays 4 baht per minute, and why?
+
+I would rather extend the `bikeshare-good` version. Because it uses a `MemberType` enum that encapsulates the fee rules, I only need to add `VISITOR(4)` to the enum, and the rest of the code will handle it automatically. In `bikeshare-poor`, I would have to find hardcoded numbers scattered in the code, which is error-prone.
 
 ## Task 5. Reflection
 
