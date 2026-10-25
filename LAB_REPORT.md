@@ -75,7 +75,6 @@ Table 3. What you did with each SonarQube issue in Table 1
 
 | No. in Table 1 | Fixed or kept | Commit, or the reason for keeping it |
 | --- | --- | --- |
-| 1 | | |
 
 Number of SonarQube issues that remain after your fixes:
 
@@ -83,8 +82,6 @@ The two design problems that you fixed
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
-| | | |
-| | | |
 
 Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
 
